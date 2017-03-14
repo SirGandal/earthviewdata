@@ -10,8 +10,41 @@ After a week of using the [Earth View from Google Earth](https://chrome.google.c
 I then discovered that those images can be discovered from a website: https://earthview.withgoogle.com/.   
 I was pleased to know that I could download those images to use as wallpaper, less so when I discovered that the resolution of the wallpapers was 1800x1200.  Since I use three monitors and the wallpaper expands all three of them I wanted something at a higher resolution.  
 
-##About the script##
-TODO  
+## About the script ##
+There are plenty of scripts available already that scrape earthview to download all the wallpapers but that's not what I wanted to achieve with this script (although this functionality could be easily added by accessing the *downloadUrl* on the *Photo* object). Rather I just wanted to extract the data to use them somewhere else (Google Earth Pro in my case). I decided to go for vanilla javascript in the browser console because of the zero set up time.
+
+The first step was having a look at the DOM for the page controls:
+> `<a class="pagination__link pagination__link--next" href="/redwood-city-united-states-1589" title="Next image"`**`data-photo-api`**`="`**`/_api/redwood-city-united-states-1589.json`**`">`  
+
+Here I noticed that the handle for the next image has a **data-photo-api** that can be easily accessed by going to https://earthview.withgoogle.com/{value-of-data-photo-api}.  
+
+By going to https://earthview.withgoogle.com/_api/redwood-city-united-states-1589.json, for example, we can see that:  
+
+    {
+	    "id": "1589",
+	    "slug": "redwood-city-united-states-1589",
+	    "url": "/redwood-city-united-states-1589",
+	    "api": "/_api/redwood-city-united-states-1589.json",
+	    "title": "Redwood City, United States – Earth View from Google",
+	    "lat": "37.489485",
+	    "lng": "-122.199265",
+	    "photoUrl": "https://www.gstatic.com/prettyearth/assets/full/1589.jpg",
+	    "thumbUrl": "https://www.gstatic.com/prettyearth/assets/preview/1589.jpg",
+	    "downloadUrl": "/download/1589.jpg",
+	    "region": "Redwood City",
+	    "country": "United States",
+	    "attribution": "©2014 DigitalGlobe, U.S. Geological Survey, USDA Farm Service Agency",
+	    "mapsLink": "https://www.google.com/maps/@37.489485,-122.199265,17z/data=!3m1!1e3",
+	    "mapsTitle": "View Redwood City, United States in Google Maps",
+	    "nextUrl": "/al-ahsa-saudi-arabia-2066",
+	    "nextApi": "/_api/al-ahsa-saudi-arabia-2066.json",
+	    "prevUrl": "/dakhlet-nouadhibou-mauritania-6324",
+	    "prevApi": "/_api/dakhlet-nouadhibou-mauritania-6324.json"
+     }
+
+I was pleased to see **nextApi** as one of the property of the object returned. This means that just by accessing the first image on the home page we can go through all the images by always going to the next api. Eventually we will circle back by finding the first image once again. That is the our clue stop looking for more photos.  
+
+Once we have gathered every JSON object for each photo we can download the data however we want provided that we format them properly ahead of time.  
 
 ## How to use ##
 
