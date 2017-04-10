@@ -48,10 +48,10 @@ Once we have gathered every JSON object for each photo we can download the data 
 
 ## How to use ##
 
-###Background###
+### Background ###  
 Google Earth Pro is now available for free and one of its features is the possibility of downloading satellite images up to 4K.  In order to download the same images that we can see in Earth View into Google Earth Pro we need to know the locations they are linked to. To do so we can run a little script on the Earth View website that can allow us to get the latitude and longitude of the locations. We then package those information into a kml file that we can open into Google Earth Pro giving as the ability to have all the locations in one place and the ability to download the satelitte images in 4K.
 
-###Steps###
+### Steps ###  
  - On Google Chrome go to https://earthview.withgoogle.com/.
  - Open the Chrome Dev Tools.
  - Copy the content of app.js, paste it to the Console and press enter.
@@ -64,8 +64,8 @@ Google Earth Pro is now available for free and one of its features is the possib
  - Click on Resolution and select "4K UHD" or "Maximum".
  - Click on Save Image.
 
-##Some stats##
-###Countries with most photos###
+## Some stats ##
+### Countries with most photos ###
 
  1. United States - 313
  2. Australia - 88
